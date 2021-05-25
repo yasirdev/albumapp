@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import { getAlbums } from '../../redux/services/user';
+import { getAlbums } from '../../redux/services/home';
 
 interface HomeProps { }
 

@@ -1,1 +1,1 @@
-export * from './AuthTypes';
+export * from './AlbumTypes';
