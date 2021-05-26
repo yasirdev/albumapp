@@ -20,6 +20,7 @@ const Routes = () => (
         }} component={Home} />
         <MainStack.Screen name="photos" options={{
             title: '',
+            headerBackTitleVisible: false,
             headerStyle: { backgroundColor: '#ccc' }
         }} component={Album} />
     </MainStack.Navigator>

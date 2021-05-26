@@ -77,7 +77,7 @@ const Home = (props: HomeProps) => {
                 </View>}
                 renderItem={props => {
                     let item: AlbumItemProps = props.item
-                    return <AlbumHomeItem onAlbumSelect={() => homeProps.navigation.navigate('photos', { id: item.id })} {...props} />
+                    return <AlbumHomeItem onAlbumSelect={() => homeProps.navigation.navigate('photos', { album: item })} {...props} />
                 }}
             />
         </View >
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     filterOptionsView: {
         position: 'absolute',
         width: '100%',
-        margin: 10,
+        padding: 10,
         zIndex: 999,
         alignItems: 'flex-end'
     },

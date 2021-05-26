@@ -26,7 +26,8 @@ const initialState = {
 }
 
 const Album = (props: HomeProps) => {
-    let albumId = props.route.params.id;
+    let album = props.route.params.album;
+
     const [
         { selectedPhoto, selectedIndex, photos, loading }, setState
     ] = useState(initialState);
@@ -36,14 +37,15 @@ const Album = (props: HomeProps) => {
     }
 
     useEffect(() => {
-        fetchPhotos()
+        fetchPhotos();
+        props.navigation.setOptions({ title: album.title })
     }, []);
 
 
     const fetchPhotos = () => {
-        getPhotos(albumId)
+        getPhotos(album.id)
             .then(res => {
-                let selectedPhoto = { ...res[0] };
+                let selectedPhoto = res[0];
                 updateState({ photos: res, selectedPhoto, selectedIndex: 0, loading: false })
             }).catch(err => {
                 updateState({ photos: [], loading: false })
@@ -74,7 +76,7 @@ const Album = (props: HomeProps) => {
     return (
         <View style={styles.container}>
 
-            {selectedPhoto['url'] && <View style={styles.imageContainerView}>
+            {selectedPhoto['url'] && <><View style={styles.imageContainerView}>
                 <View style={{ position: 'absolute', width: '100%' }}>
                     <ImageComp
                         resizeMode={'cover'}
@@ -88,6 +90,10 @@ const Album = (props: HomeProps) => {
                     <Pressable disabled={isDisabled(2)} onPress={() => onPrev(2)} style={[styles.nextPrevButton, isDisabled(2) ? { opacity: 0.5 } : null]}><Image style={styles.nextBtnImage} source={require('../../assets/next.png')} /></Pressable>
                 </View>
             </View>
+
+                <Text style={{ paddingHorizontal: 10, paddingVertical: 10, textAlign: 'center' }} numberOfLines={1}>{selectedPhoto.title}</Text>
+
+            </>
             }
             <FlatList
                 refreshing={loading}
