@@ -4,16 +4,19 @@ import { AlbumItemProps } from '../../redux/models';
 import { ImageComp } from '../imageComp';
 const { width, height } = Dimensions.get('window');
 
-interface AlbumHomeItemProps extends ListRenderItemInfo<AlbumItemProps> {
-    viewStyles?: any
-    onAlbumSelect: () => void
+interface PhotoItemProps extends ListRenderItemInfo<AlbumItemProps> {
+    onImageSelect: () => void;
+    isSelected: boolean
 }
 
-const AlbumHomeItem = (props: AlbumHomeItemProps) => {
+const PhotoItem = (props: PhotoItemProps) => {
     return (
-        <Pressable onPress={props.onAlbumSelect} style={[styles.container, props.viewStyles]}>
+        <Pressable onPress={() => {
+            props.onImageSelect();
+
+        }} style={[styles.container, props.isSelected ? { borderColor: '#fff' } : null]}>
             <ImageComp
-                resizeMode='center'
+                resizeMode='cover'
                 containerStyle={styles.imageContainer}
                 style={styles.imageContainer}
                 source={{ uri: props.item.thumbnailUrl }} />
@@ -24,7 +27,7 @@ const AlbumHomeItem = (props: AlbumHomeItemProps) => {
     );
 };
 
-export { AlbumHomeItem };
+export { PhotoItem };
 
 const styles = StyleSheet.create({
     title: {
@@ -32,11 +35,16 @@ const styles = StyleSheet.create({
         fontSize: 18
     },
     imageContainer: {
-        width: width / 2.5,
+        width: '100%',
         height: 100,
     },
     container: {
+        borderWidth: 2,
+        borderColor: 'transparent',
+        marginBottom: 12,
+        width: width / 4,
         flexDirection: 'row',
-        marginHorizontal: 10
+        marginVertical: (width / 4) / 6,
+        marginHorizontal: (width / 4) / 6
     }
 });

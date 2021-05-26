@@ -3,7 +3,7 @@ import {
 } from '../types';
 
 const initialState = {
-  albums: [],
+  selectedPhotoUrl: '',
 };
 
 const HomeReducer = (state = initialState, action: any) => {

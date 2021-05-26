@@ -7,15 +7,21 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { enableScreens } from 'react-native-screens';
 
 import Home from '../screens/Home';
+import Album from '../screens/album';
 enableScreens();
 
 const MainStack = createStackNavigator();
 
 const Routes = () => (
-    <MainStack.Navigator
-        screenOptions={{}}
-        headerMode="none">
-        <MainStack.Screen name="home" component={Home} />
+    <MainStack.Navigator>
+        <MainStack.Screen name="home" options={{
+            title: 'Album App',
+            headerStyle: { backgroundColor: '#ccc' }
+        }} component={Home} />
+        <MainStack.Screen name="photos" options={{
+            title: '',
+            headerStyle: { backgroundColor: '#ccc' }
+        }} component={Album} />
     </MainStack.Navigator>
 );
 
